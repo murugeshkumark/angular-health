@@ -26,7 +26,8 @@ public class ApplicationUserService {
 
     JSONObject response = new JSONObject();
     if(applicationUser.getUser_name()!=null){
-    applicationUserRepository.save(applicationUser);
+      applicationUser.setUser_name("123");
+      ApplicationUser savedEntity = applicationUserRepository.save(applicationUser);
     response.put("message", "Registration successful");
     }else{
        response.put("message", "Password or username policy failed");
