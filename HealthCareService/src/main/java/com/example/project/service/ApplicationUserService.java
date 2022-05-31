@@ -22,6 +22,9 @@ public class ApplicationUserService {
   @Autowired
   ApplicationUserRepository applicationUserRepository;
 
+  @Autowired
+  JwtUtil jwtUtil;
+
   public JSONObject register(ApplicationUser applicationUser) {
 
     JSONObject response = new JSONObject();
@@ -45,7 +48,7 @@ public class ApplicationUserService {
     if (user != null && user.getPassword() != null
         && user.getPassword().equalsIgnoreCase(applicationUser.getPassword())) {
       response.put("message", "Authentication successful");
-      response.put("token", JwtUtil.createToken(user.getUser_name()));
+      response.put("token", jwtUtil.createToken(user.getUser_name()));
       response.put("id", user.getUser_name());
     } else {
       response.put("message", "Username or Password is Incorrect");

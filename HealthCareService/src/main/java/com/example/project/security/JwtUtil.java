@@ -20,12 +20,13 @@ public class JwtUtil {
   @Value("${jwt.secret}")
   private String secret;
 
-	public static String getUsername(String token) {
-		return Jwts.parser().parseClaimsJws(token.replace("", "")).getBody().getSubject();
+	public String getUsername(String token) {
+		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token.replace("", "")).getBody().getSubject();
   }
 
-  public static String createToken(String username){
-      return Jwts.builder().setSubject(username).signWith(SignatureAlgorithm.HS512, "secretKey")
+  public String createToken(String username){
+      return Jwts.builder().setSubject(username)
+      .signWith(SignatureAlgorithm.HS512, secret)
       .setExpiration(new Date(System.currentTimeMillis()+10000))
       .compact();
   }
