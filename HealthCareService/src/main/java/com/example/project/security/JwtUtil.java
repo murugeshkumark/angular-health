@@ -16,4 +16,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtUtil {
 
+	public static String getUsername(String token) {
+		return null;
+	}
+
 }
