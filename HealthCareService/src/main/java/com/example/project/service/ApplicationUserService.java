@@ -16,10 +16,17 @@ import com.example.project.Model.ApplicationUser;
 import com.example.project.repository.ApplicationUserRepository;
 import com.example.project.security.JwtUtil;
 
-
-
 @Service
 public class ApplicationUserService {
 
+  public JSONObject register(ApplicationUser applicationUser) {
+    JSONObject response = new JSONObject();
+    response.put("message", "Registration successful");
+    return response;
+  }
+
+public JSONObject signin(ApplicationUser applicationUser) {
+	return null;
 }
 
+}

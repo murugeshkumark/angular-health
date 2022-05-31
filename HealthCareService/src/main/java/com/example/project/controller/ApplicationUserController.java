@@ -17,5 +17,17 @@ import com.example.project.service.ApplicationUserService;
 @RestController
 public class ApplicationUserController {
 
-	
+  @Autowired
+  ApplicationUserService applicationUserService;
+
+  @RequestMapping(method = RequestMethod.POST, value = "/register")
+  public JSONObject register(ApplicationUser applicationUser) {
+    return applicationUserService.register(applicationUser);
+  }
+
+  @RequestMapping(method = RequestMethod.POST, value = "signin")
+  public JSONObject signin(ApplicationUser applicationUser) {
+    return applicationUserService.signin(applicationUser);               
+  }
+
 }
