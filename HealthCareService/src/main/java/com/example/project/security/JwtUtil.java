@@ -1,5 +1,6 @@
 package com.example.project.security;
 
+import java.nio.charset.Charset;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +21,7 @@ public class JwtUtil {
   private String secret;
 
 	public static String getUsername(String token) {
-		return Jwts.parser().setSigningKey("secretkey").parseClaimsJws(token.replace("", "")).getBody().getSubject();
+		return Jwts.parser().sign.setSigningKey("secretkey".getBytes(Charset.forName("UTF-8"))).parseClaimsJws(token.replace("", "")).getBody().getSubject();
   }
 
   public static String createToken(String username){
