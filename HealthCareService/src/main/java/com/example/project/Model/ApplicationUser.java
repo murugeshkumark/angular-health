@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class ApplicationUser {
-    @Id
+     @Id
      public String user_name;
      public String user_email;
      public String password;

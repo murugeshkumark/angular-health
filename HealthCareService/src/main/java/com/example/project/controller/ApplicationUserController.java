@@ -21,12 +21,12 @@ public class ApplicationUserController {
   ApplicationUserService applicationUserService;
 
   @RequestMapping(method = RequestMethod.POST, value = "/register")
-  public JSONObject register(ApplicationUser applicationUser) {
+  public JSONObject register(@RequestBody ApplicationUser applicationUser) {
     return applicationUserService.register(applicationUser);
   }
 
   @RequestMapping(method = RequestMethod.POST, value = "signin")
-  public JSONObject signin(ApplicationUser applicationUser) {
+  public JSONObject signin(@RequestBody ApplicationUser applicationUser) {
     return applicationUserService.signin(applicationUser);               
   }
 
