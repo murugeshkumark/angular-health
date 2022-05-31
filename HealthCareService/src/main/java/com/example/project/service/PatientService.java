@@ -13,4 +13,31 @@ import com.example.project.repository.PatientRepository;
 @Service
 public class PatientService {
 
+  PatientRepository patientRepository;
+
+  public JSONObject register(Patient patient) {
+    JSONObject jsonObject = new JSONObject();
+    if (patient == null || patient.getPatient_Id() == null) {
+      jsonObject.put("message", "Registration failure");
+    } else {
+      Patient savedEntity = patientRepository.save(patient);
+      if(savedEntity!=null){
+        jsonObject.put("message", "Registration successful");
+      }
+    }
+    return jsonObject;
+  }
+
+public List<Patient> list() {
+	return patientRepository.findAll();
+}
+
+public Patient view(String id) {
+	return patientRepository.findById(id).orElse(null);
+}
+
+public void delete(String id){
+   patientRepository.deleteById(id);
+}
+
 }

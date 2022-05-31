@@ -13,8 +13,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.project.Model.Patient;
 import com.example.project.service.PatientService;
-@RestController
+@RestController("/patients")
 public class PatientController {
 
+  @Autowired
+  private PatientService patientService;
+
+  @RequestMapping(method = RequestMethod.POST, value = "/register")
+  public JSONObject register(@RequestBody Patient patient){
+      return patientService.register(patient);
+  }
+
+  @RequestMapping(method = RequestMethod.GET, value="/list/")
+  public List<Patient> list(){
+    return patientService.list();
+  }
+
+  @RequestMapping(method = RequestMethod.GET, value="/view/{Id}")
+  public Patient view(@PathVariable("Id") String id){
+    return patientService.view(id);
+  }
+
+  @RequestMapping(method = RequestMethod.DELETE, value = "/delete/{Id}")
+  public String delete(@PathVariable("Id") String id){
+    patientService.delete(id);
+    return "";
+  }
 	
 }
