@@ -9,6 +9,13 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 @Component
-public class ApiAuthenticationEntryPoint  {
+public class ApiAuthenticationEntryPoint  implements AuthenticationEntryPoint{
+
+  @Override
+  public void commence(HttpServletRequest arg0, HttpServletResponse arg1, AuthenticationException arg2)
+      throws IOException, ServletException {
+    arg1.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+
+  }
 
 }
