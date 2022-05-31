@@ -18,7 +18,7 @@ public class PatientService {
 
   public JSONObject register(Patient patient) {
     JSONObject jsonObject = new JSONObject();
-    if (patient == null || patient.getPatient_Id() == null) {
+    if (patient == null ) {
       jsonObject.put("message", "Registration failure");
     } else {
       Patient savedEntity = patientRepository.save(patient);
