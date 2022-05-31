@@ -25,27 +25,33 @@ public class ApplicationUserService {
   public JSONObject register(ApplicationUser applicationUser) {
 
     JSONObject response = new JSONObject();
-    if(applicationUser.getUser_name()!=null){
+    if (applicationUser.getUser_name() != null) {
       ApplicationUser savedEntity = applicationUserRepository.save(applicationUser);
-    response.put("message", "Registration successful");
-    }else{
-       response.put("message", "Password or username policy failed");
+      response.put("message", "Registration successful");
+    } else {
+      response.put("message", "Password or username policy failed");
     }
     return response;
   }
 
-public JSONObject signin(ApplicationUser applicationUser) {
-  ApplicationUser user = applicationUserRepository.findById(applicationUser.getUser_name()).orElse(null);
-  JSONObject response = new JSONObject();
-  if(user != null  && user.getPassword()!=null && user.getPassword().equalsIgnoreCase(applicationUser.getPassword())){
-    response.put("message", "Authentication successful");
-    response.put("token","asdsadas");
-    response.put("id",user.getUser_name());
-  }else{
-response.put("message", "Username or Password is Incorrect");
+  public JSONObject signin(ApplicationUser applicationUser) {
+    if (applicationUser.getUser_name() == null) {
+      JSONObject response = new JSONObject();
+      response.put("message", "Username or Password is Incorrect");
+      return response;
+    }
+    ApplicationUser user = applicationUserRepository.findById(applicationUser.getUser_name()).orElse(null);
+    JSONObject response = new JSONObject();
+    if (user != null && user.getPassword() != null
+        && user.getPassword().equalsIgnoreCase(applicationUser.getPassword())) {
+      response.put("message", "Authentication successful");
+      response.put("token", "asdsadas");
+      response.put("id", user.getUser_name());
+    } else {
+      response.put("message", "Username or Password is Incorrect");
+    }
+
+    return response;
   }
-	
-   return response;
-}
 
 }

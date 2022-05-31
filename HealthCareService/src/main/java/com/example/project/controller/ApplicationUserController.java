@@ -25,7 +25,7 @@ public class ApplicationUserController {
     return applicationUserService.register(applicationUser);
   }
 
-  @RequestMapping(method = RequestMethod.POST, value = "signin")
+  @RequestMapping(method = RequestMethod.POST, value = "/signin")
   public JSONObject signin(@RequestBody ApplicationUser applicationUser) {
     return applicationUserService.signin(applicationUser);               
   }
