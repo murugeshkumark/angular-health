@@ -155,8 +155,8 @@ public class HealthCareServiceApplicationTests {
                 .andExpect(status().isOk()).andReturn();
         System.out.println("hello5"+result1);
         List<Patient> patient = pr.findAll();
-        String patientid = "patient1";
-        String patientid1 = "patient2";
+        String patientid = patient.get(0).getPatient_Id();
+        String patientid1 = patient.get(1).getPatient_Id();
         System.out.println("size"+patientid);
         mockMvc.perform(get("/patients/view/"+patientid)
                 .header(HttpHeaders.AUTHORIZATION,
@@ -186,7 +186,7 @@ public class HealthCareServiceApplicationTests {
                 .andExpect(status().isOk()).andReturn();
     token = JsonPath.read(result.getResponse().getContentAsString(), "$.token");
     List<Patient> patient = pr.findAll();
-    String patientid = "patient1";
+    String patientid = patient.get(0).getPatient_Id();
      SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
      Date date1 = sd.parse("27/05/1996");
     Appointment A1 = new Appointment("disease1",date1,"High",patientid);
