@@ -26,7 +26,6 @@ public class ApplicationUserService {
 
     JSONObject response = new JSONObject();
     if(applicationUser.getUser_name()!=null){
-      applicationUser.setUser_name("123");
       ApplicationUser savedEntity = applicationUserRepository.save(applicationUser);
     response.put("message", "Registration successful");
     }else{
