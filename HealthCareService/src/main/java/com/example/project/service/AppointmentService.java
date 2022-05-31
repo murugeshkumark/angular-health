@@ -15,5 +15,18 @@ import com.example.project.repository.PatientRepository;
 
 @Service
 public class AppointmentService {
-	
+
+  @Autowired
+  AppointmentRepository appointmentRepository;
+
+  public JSONObject register(Appointment appointment) {
+    JSONObject jsonObject = new JSONObject();
+
+    appointmentRepository.save(appointment);
+    jsonObject.put("message", "Booking Successful");
+
+    return jsonObject;
+
+  }
+
 }

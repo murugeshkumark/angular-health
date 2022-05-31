@@ -18,6 +18,13 @@ import com.example.project.service.AppointmentService;
 
 @RestController
 public class AppointmentController {
-	
-	
+
+  @Autowired
+  AppointmentService appointmentService;
+
+  @RequestMapping(method = RequestMethod.POST, value = "/appointment/register")
+  public JSONObject register(@RequestBody Appointment appointment) {
+    return appointmentService.register(appointment);
+  }
+
 }
