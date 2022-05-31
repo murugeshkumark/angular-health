@@ -30,4 +30,9 @@ public class ApplicationUserController {
     return applicationUserService.signin(applicationUser);               
   }
 
+  @GetMapping(value="/viewprofile/{userId}")
+  public ApplicationUser viewprofile(@PathVariable("userId") String userId){
+    return applicationUserService.viewProfile(userId);
+  }
+
 }

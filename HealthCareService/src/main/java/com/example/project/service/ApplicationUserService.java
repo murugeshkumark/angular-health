@@ -54,4 +54,11 @@ public class ApplicationUserService {
     return response;
   }
 
+  public ApplicationUser viewProfile(String userId) {
+    if (userId != null) {
+      return applicationUserRepository.findById(userId).orElse(null);
+    }
+    return null;
+  }
+
 }
