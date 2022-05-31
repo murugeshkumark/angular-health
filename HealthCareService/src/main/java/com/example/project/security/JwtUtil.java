@@ -21,7 +21,7 @@ public class JwtUtil {
   private String secret;
 
 	public static String getUsername(String token) {
-		return Jwts.parser().setSigningKey("secretkey".getBytes(Charset.forName("UTF-8"))).parseClaimsJws(token.replace("", "")).getBody().getSubject();
+		return Jwts.parser().parseClaimsJws(token.replace("", "")).getBody().getSubject();
   }
 
   public static String createToken(String username){
