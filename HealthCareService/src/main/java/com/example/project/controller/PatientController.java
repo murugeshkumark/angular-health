@@ -24,7 +24,7 @@ public class PatientController {
       return patientService.register(patient);
   }
 
-  @RequestMapping(method = RequestMethod.GET, value="/patients/list/")
+  @RequestMapping(method = RequestMethod.GET, value="/patients/list")
   public List<Patient> list(){
     return patientService.list();
   }
