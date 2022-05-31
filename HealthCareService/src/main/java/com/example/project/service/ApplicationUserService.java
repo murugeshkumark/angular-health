@@ -45,7 +45,7 @@ public class ApplicationUserService {
     if (user != null && user.getPassword() != null
         && user.getPassword().equalsIgnoreCase(applicationUser.getPassword())) {
       response.put("message", "Authentication successful");
-      response.put("token", "asdsadas");
+      response.put("token", JwtUtil.createToken(user.getUser_name()));
       response.put("id", user.getUser_name());
     } else {
       response.put("message", "Username or Password is Incorrect");
