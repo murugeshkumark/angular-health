@@ -23,9 +23,14 @@ public class ApplicationUserService {
   ApplicationUserRepository applicationUserRepository;
 
   public JSONObject register(ApplicationUser applicationUser) {
-    applicationUserRepository.save(applicationUser);
+
     JSONObject response = new JSONObject();
+    if(applicationUser.getUser_name()!=null){
+    applicationUserRepository.save(applicationUser);
     response.put("message", "Registration successful");
+    }else{
+       response.put("message", "Password or username policy failed");
+    }
     return response;
   }
 
