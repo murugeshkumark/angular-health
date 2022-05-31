@@ -13,6 +13,7 @@ import com.example.project.repository.PatientRepository;
 @Service
 public class PatientService {
 
+  @Autowired
   PatientRepository patientRepository;
 
   public JSONObject register(Patient patient) {
