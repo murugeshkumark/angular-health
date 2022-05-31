@@ -19,14 +19,31 @@ import com.example.project.security.JwtUtil;
 @Service
 public class ApplicationUserService {
 
+  @Autowired
+  ApplicationUserRepository applicationUserRepository;
+
   public JSONObject register(ApplicationUser applicationUser) {
+    applicationUserRepository.save(applicationUser);
     JSONObject response = new JSONObject();
     response.put("message", "Registration successful");
     return response;
   }
 
 public JSONObject signin(ApplicationUser applicationUser) {
-	return null;
+  ApplicationUser user = applicationUserRepository.findById(applicationUser.getUser_name()).orElse(null);
+  JSONObject response = new JSONObject();
+  if(user ! = null  && user.getPassword()!=null && user.getPassword().equalsIgnoreCase(applicationUser.getPassword())){
+  
+    response.put("message", "Authentication successful");
+    response.put("token","asdsadas");
+    response.put("id",user.getUser_name())
+ 
+  }else{
+response.put("message", "Username or Password is Incorrect");
+  }
+	
+   return response;
 }
+
 
 }
