@@ -21,10 +21,13 @@ export class ApiService {
 
   public checkLogin(user_name: string, password: string): Observable<any> {
     // should return response from server
-
+    let user: Users;
+    user = new Users;
+    user.user_name = user_name;
+    user.password = password;
+    return this.http.post(this.API_URL+"/login",user);
     // handle error 
 
-    return;
   }
 
   public regNewUser(regNewUser): Observable<any> {

@@ -54,9 +54,9 @@
         <div class="col-sm-12 clmn12">
           <!-- disable button if form not valid -->
           <!-- call doLogin method when clicking on this button-->
-          <button id="loginBtn" class="login-btn" type="submit" >Login</button>
+          <button id="loginBtn" class="login-btn" type="submit" (click)="doLogin()">Login</button>
           <!-- call signUp method when clicking on this button-->
-          <button id="signupBtn" class="guest-btn">Sign up</button>
+          <button id="signupBtn" class="guest-btn" [routerLink]="['/register_user']" routerLinkActive="router-link-active" >Sign up</button>
         </div>
       </form>
     </div>

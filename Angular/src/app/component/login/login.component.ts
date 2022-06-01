@@ -40,6 +40,15 @@ export class LoginComponent implements OnInit {
 	}
 
 	doLogin() {
+		console.debug("login...");
+		let username = this.loginForm.get("userName").value;
+		let password = this.loginForm.get("password").value;
+		this.dataService.authenticateUser(username,password).subscribe(res =>{
+			console.log(res);
+		},
+		(error) =>{
+			console.log(error);
+		})
 		// call authenticateUser method to perform login operation
 		// if success, redirect to profile page
 		// else display appropriate error message

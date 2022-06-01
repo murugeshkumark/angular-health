@@ -27,6 +27,10 @@ export class DataService {
     // store 'token' from response as key name 'token' to the localstorage
 
     // return true if user authenticated
+    let authStatus = false;
+    this.api.checkLogin(user_name,password).subscribe(res =>{
+      authStatus =  res;
+    })
 
     // return false if user not authenticated 
 
