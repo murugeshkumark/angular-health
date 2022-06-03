@@ -5,27 +5,35 @@
       <h2 >LOGIN</h2>
     </div>
     <div class="login-form-wrapper" >
-      <form class="ro-form">
+      <form class="ro-form" [formGroup]="loginForm" (change)="log()">
         <div class="form-group">
           <label class="labelHead" for="username">
             <b>Username</b>
           </label>
-          <input type="text" id="username" placeholder="username">
+          <input type="text" id="username" placeholder="username" formControlName="userName">
 
           <div class="form-error-messages"
-            id="error-no-username">
+            id="error-no-username"
+            *ngIf="loginForm.get('userName').dirty && loginForm.get('userName').invalid && loginForm.get('userName').errors.required"
+            >
             {{emptyUserName}}
           </div>
           <div class="form-error-messages"
-            id="error-minlength-username">
+            id="error-minlength-username"
+            *ngIf="loginForm.get('userName').dirty && loginForm.get('userName').invalid && loginForm.get('userName').errors.minlength"
+            >
             {{minlengthUserName}}
           </div>
           <div class="form-error-messages"
-            id="error-maxlength-username">
+            id="error-maxlength-username"
+            *ngIf="loginForm.get('userName').dirty && loginForm.get('userName').invalid && loginForm.get('userName').errors.maxlength"
+            >
             {{maxlengthUserName}}
           </div>
           <div class="form-error-messages"
-            id="error-pattern-username">
+            id="error-pattern-username"
+            *ngIf="loginForm.get('userName').dirty && loginForm.get('userName').invalid && loginForm.get('userName').errors.pattern"
+            >
             {{userNamePattern}}
           </div>
         </div>
@@ -33,28 +41,36 @@
           <label class="labelHead" for="password">
             <b>Password</b>
           </label>
-          <input type="password" id="password" placeholder="password">
+          <input type="password" id="password" placeholder="password" formControlName="password">
           <div class="form-error-messages"
-            id="error-no-password">
+            id="error-no-password"
+            *ngIf="loginForm.get('password').dirty && loginForm.get('password').invalid && loginForm.get('password').errors.required"
+            >
             {{emptyPassword}}
           </div>
           <div class="form-error-messages"
-            id="error-minlength-password">
+            id="error-minlength-password" 
+            *ngIf="loginForm.get('password').dirty && loginForm.get('password').invalid && loginForm.get('password').errors.minlength"
+            >
             {{minlengthPassword}}
           </div>
           <div class="form-error-messages"
-            id="error-maxlength-password">
+            id="error-maxlength-password"
+            *ngIf="loginForm.get('password').dirty && loginForm.get('password').invalid && loginForm.get('password').errors.maxlength"
+            >
             {{maxlengthPassword}}
           </div>
           <div class="form-error-messages" 
-            id="error-pattern-password">
+            id="error-pattern-password"
+            *ngIf="loginForm.get('password').dirty && loginForm.get('password').invalid && loginForm.get('password').errors.pattern"
+            >
             {{passwordPattern}}
           </div>
         </div>
         <div class="col-sm-12 clmn12">
           <!-- disable button if form not valid -->
           <!-- call doLogin method when clicking on this button-->
-          <button id="loginBtn" class="login-btn" type="submit" (click)="doLogin()">Login</button>
+          <button id="loginBtn" class="login-btn" type="submit" [disabled]="loginForm.invalid" (click)="doLogin()">Login</button>
           <!-- call signUp method when clicking on this button-->
           <button id="signupBtn" class="guest-btn" [routerLink]="['/register_user']" routerLinkActive="router-link-active" >Sign up</button>
         </div>

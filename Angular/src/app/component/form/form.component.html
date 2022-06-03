@@ -10,13 +10,13 @@
 
         </div>
         <!-- call submitForm method with all form values if form is valid -->
-        <form>
+        <form [formGroup]="complexForm">
 
           <div class="form-group">
             <label class="label-name">
               Name:<span class="required">*</span>
             </label>
-            <input id="firstname" class="form-control text-box" type="text" placeholder="NAME">
+            <input id="firstname" class="form-control text-box" type="text" placeholder="NAME" formControlName="name">
             <div id="error-no-firstname" class="alert alert-danger error-msg">
               {{emptyName}}
             </div>

@@ -39,7 +39,7 @@ export class FormComponent implements OnInit {
   constructor( fb: FormBuilder,private datePipe: DatePipe,private route: Router, private dataService: DataService){
     // add necessary validators
     this.complexForm = fb.group({
-      'name' : [''],
+      'name' : ['',Validators.required],
       'gender' : [null],
       'dob' : [null],
       'mobile' : [''],
@@ -50,6 +50,7 @@ export class FormComponent implements OnInit {
   submitForm(value: any){
 
     // should reister new patient using service
+      this.dataService.registerPatient(value);
        // fields that need to be added: patient_name, patient_gender, patient_dob, patient_mobile, patient_email
     // if added successfully should redirect to 'patientList' page
 

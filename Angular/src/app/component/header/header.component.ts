@@ -1,5 +1,5 @@
 import { Component, OnInit, DoCheck, Inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import {DataService } from '../../services/data.service';
 import {ActivatedRoute} from '@angular/router';
@@ -20,18 +20,25 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
     // call getProfileDetails method to get user details
+    this.getProfileDetails();
 
   }
 
   getProfileDetails() {
 
   // call getUserDetails method of dataService and assign response to userDetails property
+    this.dataService.getUserDetails().subscribe(res=>{
+      this.userDetails = res;
+    },(error)=>{
+      throwError(error);
+    })
 
   }
 
   logout() {
 
     // call doLogOut method
+    this.dataService.doLogOut();
     
   }
   

@@ -12,7 +12,12 @@ export class AuthGuardService implements CanActivate {
   canActivate(): boolean {
     // return true if authenticated else redirect to login page
 
-    return;
+    if(!this.dataService.isLoggedIn){
+      console.debug("user not logged in, redirecting to login page")
+      this.router.navigate(["/login"])
+    }
+
+    return true;
   }
 
 }

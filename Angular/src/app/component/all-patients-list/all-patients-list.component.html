@@ -15,17 +15,17 @@
       </thead>
       <tbody>
         <!-- display all patients list -->
-        <tr id="table-row">
-          <td id="table-id" ><!--display patient_Id--></td>
-          <td id="table-firstname" class="td-column"><!--display patient_name--></td>
-          <td id="table-gender"><!--display patient_gender--></td>
-          <td id="table-dob"><!--display patient_dob--></td>
-          <td id="table-mobile"><!--display patient_mobile-->}</td>
-          <td id="table-email"><!--display patient_email--></td>
+        <tr id="table-row" *ngFor="let patient of allPatients">
+          <td id="table-id" >{{patient.userId}}<!--display patient_Id--></td>
+          <td id="table-firstname" class="td-column">{{patient.patient_name}}<!--display patient_name--></td>
+          <td id="table-gender">{{patient.patient_gender}}<!--display patient_gender--></td>
+          <td id="table-dob">{{patient.patient_dob}}<!--display patient_dob--></td>
+          <td id="table-mobile">{{patient.patient_dob}}<!--display patient_mobile-->}</td>
+          <td id="table-email">{{patient.patient_email}}<!--display patient_email--></td>
           <td id="table-registeredOn"><!--display registeredDate--></td>
           <td class="column-btn">
             <!--call view method with selected id when clicking this button-->
-            <a id="view" class="view-details">View Details</a>
+            <a id="view" class="view-details" (click)="view(patient?.patient_Id)">View Details</a>
           </td>
         </tr>
       </tbody>
