@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder,Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { Patient } from '../../models/patient';
@@ -36,23 +36,27 @@ export class FormComponent implements OnInit {
     this.today = this.datePipe.transform(Date.now(), 'yyyy-MM-dd');
   }
 
-  constructor( fb: FormBuilder,private datePipe: DatePipe,private route: Router, private dataService: DataService){
+  constructor(fb: FormBuilder, private datePipe: DatePipe, private route: Router, private dataService: DataService) {
     // add necessary validators
     this.complexForm = fb.group({
-      'name' : ['',Validators.required],
-      'gender' : [null],
-      'dob' : [null],
-      'mobile' : [''],
-      'email' : ['']
+      'name': ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      'gender': ['', Validators.required],
+      'dob': ['', Validators.required],
+      'mobile': ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]{10,20}$")]],
+      'email': ['', [Validators.required, Validators.email]]
     })
   }
 
-  submitForm(value: any){
+  submitForm(value: any) {
 
     // should reister new patient using service
-      this.dataService.registerPatient(value);
-       // fields that need to be added: patient_name, patient_gender, patient_dob, patient_mobile, patient_email
+    this.dataService.registerPatient(value).subscribe(res => {
+
+    });
+    // fields that need to be added: patient_name, patient_gender, patient_dob, patient_mobile, patient_email
     // if added successfully should redirect to 'patientList' page
+
+    this.route.navigate(["/patientList"]);
 
   }
 
