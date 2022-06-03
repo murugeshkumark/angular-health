@@ -28,11 +28,13 @@ public class ApplicationUserService {
   public JSONObject register(ApplicationUser applicationUser) {
 
     JSONObject response = new JSONObject();
-    if (applicationUser.getUser_name() != null) {
+    if (applicationUser.getUser_name() != null){// && !applicationUserRepository.findById(applicationUser.getUser_name()).isPresent())  {
       ApplicationUser savedEntity = applicationUserRepository.save(applicationUser);
       response.put("message", "Registration successful");
+      response.put("success", true);
     } else {
       response.put("message", "Password or username policy failed");
+      response.put("success", false);
     }
     return response;
   }
@@ -41,6 +43,7 @@ public class ApplicationUserService {
     if (applicationUser.getUser_name() == null) {
       JSONObject response = new JSONObject();
       response.put("message", "Username or Password is Incorrect");
+      response.put("success", false);
       return response;
     }
     ApplicationUser user = applicationUserRepository.findById(applicationUser.getUser_name()).orElse(null);
@@ -50,8 +53,10 @@ public class ApplicationUserService {
       response.put("message", "Authentication successful");
       response.put("token", jwtUtil.createToken(user.getUser_name()));
       response.put("id", user.getUser_name());
+      response.put("success", true);
     } else {
       response.put("message", "Username or Password is Incorrect");
+      response.put("success", false);
     }
 
     return response;
@@ -63,5 +68,18 @@ public class ApplicationUserService {
     }
     return null;
   }
+
+public JSONObject updateProfile(String userId, ApplicationUser applicationUser) {
+  JSONObject response = new JSONObject();
+  if (applicationUser.getUser_name() != null) {
+    ApplicationUser savedEntity = applicationUserRepository.save(applicationUser);
+    response.put("message", "Registration successful");
+    response.put("success", true);
+  } else {
+    response.put("message", "Password or username policy failed");
+    response.put("success", false);
+  }
+  return response;
+}
 
 }

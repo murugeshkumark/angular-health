@@ -3,6 +3,7 @@ package com.example.project.controller;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,9 +31,21 @@ public class ApplicationUserController {
     return applicationUserService.signin(applicationUser);               
   }
 
-  @GetMapping(value="/viewprofile/{userId}")
+  @RequestMapping(method=RequestMethod.GET, value="/viewprofile/{userId}")
   public ApplicationUser viewprofile(@PathVariable("userId") String userId){
     return applicationUserService.viewProfile(userId);
   }
 
+  @RequestMapping(method=RequestMethod.PUT, value="/editprofile/{userId}")
+  public JSONObject updateprofile(@PathVariable("userId") String userId, @RequestBody ApplicationUser applicationUser){
+    return applicationUserService.updateProfile(userId,applicationUser);
+  }
+
 }
+
+
+
+
+
+
+
