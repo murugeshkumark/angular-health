@@ -29,17 +29,17 @@
 
         <!-- disable the same when clicking on this button -->
         <!-- call bookAppointment method when clicking on this button-->
-        <button id="book-appointment" class="btn btn-success book-btn">Book Appointment</button>
+        <button id="book-appointment" class="btn btn-success book-btn" [disabled]="!isBookAppointment" (click)="bookAppointment()">Book Appointment</button>
 
         <!-- disable the same when clicking on this button -->
         <!-- call scheduledAppointment method when clicking on this button-->
-        <button id="Scheduled-appointment" class="btn btn-warning book-btn">Scheduled Appointment</button>
+        <button id="Scheduled-appointment" class="btn btn-warning book-btn" [disabled]="!isScheduledAppointment" (click)="scheduledAppointment()">Scheduled Appointment</button>
     </div>
   </div>
 
     <!-- show book appointment form if "Book Appointment" button clicked-->
     <!-- call scheduleAppointment method if form is valid-->
-    <form id="form-container" class="form-container">
+    <form id="form-container" class="form-container" *ngIf="isFormEnabled" (ngSubmit)="scheduleAppointment()">
       <h2 class="view-header" style="padding-left: 100px">Book Appointment</h2>
         <div class="form-content">
 
@@ -96,7 +96,7 @@
     </form>
 
   <!-- show Scheduled Appointment table if "Scheduled Appointment" button clicked-->
-  <div id="table-container" class="table-container">
+  <div id="table-container" class="table-container" *ngIf="isTableEnabled">
     <h2 class="view-header">Scheduled Appointment</h2>
     <!-- display no records found message if there is no appointment -->
     <div class="no-records">No Records Found</div>
@@ -113,15 +113,15 @@
       </thead>
       <tbody>
         <!--display scheduled appointments-->
-        <tr id="table-row">
-          <td id="table-id" ><!--display booking_id--></td>
-          <td id="table-disease" class="td-column"><!--display disease--></td>
-          <td id="table-priority" ><!--display priority--></td>
-          <td id="table-tentativedate"><!--display tentativeDate--></td>
-          <td id="table-requestedOn"><!--display registeredDate--></td>
+        <tr id="table-row" *ngFor="let appointment of appointmentDetails">
+          <td id="table-id" > {{appointment.booking_id}} <!--display booking_id--></td>
+          <td id="table-disease" class="td-column"> {{appointment.disease}} <!--display disease--></td>
+          <td id="table-priority" > {{appointment.priority}} <!--display priority--></td>
+          <td id="table-tentativedate"> {{appointment.tentativeDate}} <!--display tentativeDate--></td>
+          <td id="table-requestedOn"> {{appointment.registeredDate}}<!--display registeredDate--></td>
           <td class="column-btn">
             <!-- call cancelAppointment method with selected id when clicking on this button-->
-            <button id="user-cancel" class="btn btn-danger btn-spc">
+            <button id="user-cancel" class="btn btn-danger btn-spc" (click)="cancelAppointment(appointment.booking_id)" >
               <span class="btn-value">Cancel Appointment</span>
             </button>
           </td>
